@@ -1,0 +1,47 @@
+.cartFood {
+   display: flex;
+}
+.img{
+   width: 30%;
+}
+img.img-fluid {
+   width: 100%;
+   padding: 10px;
+}
+.cartFood {
+   position: relative;
+   display: flex;
+   background: #f0f0f0;
+   margin: 25px 0px;
+   padding: 10px 10px 10px 0px;
+   border-radius: 10px;
+}
+.delete {
+   position: absolute;
+   top: 0;
+   right: 0;
+   padding: 10px 20px 0px 0px;
+   font-size: 18px;
+   color: red;
+}
+.delete:focus{
+   outline: none;
+}
+
+.name{
+   width: 45%;
+}
+.btnDiv {
+   width: 25%;
+   text-align: center;
+   align-content: center;
+}
+span.quantity {
+   padding: 0px 6px;
+}
+button {
+   padding: 0px 10px;
+   border: none;
+   font-weight: bold;
+   font-size: 23px;
+}

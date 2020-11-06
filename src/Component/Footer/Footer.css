@@ -1,0 +1,15 @@
+footer img {
+   width: 300px;
+   margin: -20px 0px -20px -20px;
+}
+footer a, Link{
+   color: #ffffff;
+   display: block;
+   line-height: 2;
+   text-decoration: none;
+}
+.link:hover{
+   cursor: pointer;
+   text-decoration: none;
+   color: #dc3545;
+}

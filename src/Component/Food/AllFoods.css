@@ -1,0 +1,20 @@
+.foods {
+   margin: 20px 25px;
+   padding: 20px;
+   text-align: center;
+   border-radius: 5px;
+   transition: all 0.5s;
+}
+img.img-fluid {
+   padding: 5px 30px 15px 30px;
+}
+.foods:hover{
+   box-shadow: 0px 0px 22px 0px #b4b4b4;
+}
+.linkS{
+   color: black;
+}
+.linkS:hover{
+   color: black;
+   text-decoration: none;
+}
