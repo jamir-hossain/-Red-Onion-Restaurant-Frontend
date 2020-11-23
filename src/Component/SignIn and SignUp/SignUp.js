@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import Logo from '../../images/logo2.png';
 
 const SignUp = () => {
    const history = useHistory()
+
+   const [signUpResult, setSignUpResult] = useState()
    const { register, handleSubmit, watch, errors } = useForm();   
    const onSubmit = data => { 
-      fetch('http://localhost:3005/signup-user', {
+      fetch('https://red-onion-backend-server.herokuapp.com/signup-user', {
          method:'POST',
          headers:{
             'Content-Type':'application/json'
@@ -16,9 +18,18 @@ const SignUp = () => {
       })
       .then(res => res.json())
       .then(result => {
-         history.push('/login')
+         console.log(result)
+         setSignUpResult(result)
+         setIsSuccess(true)
+         result.success && history.push('/login')
       })
    }
+
+   const [isSuccess, setIsSuccess] = useState(false)
+   if (isSuccess) {
+      setTimeout(()=> setIsSuccess(false), 3000)
+   }
+
 
    return (
       <div className="sign-up">
@@ -49,6 +60,10 @@ const SignUp = () => {
             </div>
             <div className="form-group">
                <button className="btn btn-danger btn-block"  type="submit">Sign Up</button>
+               {isSuccess &&
+                  <p className="ml-3 success-mgs text-success"> {signUpResult.error ? signUpResult.error : signUpResult.success && signUpResult.success} </p>
+                  
+               }
             </div>
             <div className="option text-center">
                <Link to='/login'><label>Already Have an Account</label></Link>

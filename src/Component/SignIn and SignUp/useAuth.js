@@ -84,7 +84,7 @@ const Auth = () => {
    const [userData, setUserData] = useState([])
    useEffect(() => {
       if (user) {
-         fetch('http://localhost:3005/get-user', {
+         fetch('https://red-onion-backend-server.herokuapp.com/get-user', {
             method:'GET',
             headers:{
                'Content-Type':'application/json',
@@ -102,7 +102,7 @@ const Auth = () => {
    const [cart, setCart] = useState([])
    useEffect( () => {
       if (userData) {
-         fetch('http://localhost:3005/get-cart-food', {
+         fetch('https://red-onion-backend-server.herokuapp.com/get-cart-food', {
             method:'GET',
             headers:{
                'Content-Type':'application/json'

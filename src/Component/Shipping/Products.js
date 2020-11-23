@@ -8,7 +8,7 @@ const Products = () => {
 
    // Add Quantity
    const addQuantity = (foodId, quantity) => {
-      fetch('http://localhost:3005/add-and-remove-quantity', {
+      fetch('https://red-onion-backend-server.herokuapp.com/add-and-remove-quantity', {
          method:"put",
          headers:{
             'Content-type':'application/json',
@@ -31,7 +31,7 @@ const Products = () => {
 
    // Remove Quantity
    const removeQuantity = (foodId, quantity) => {
-      fetch('http://localhost:3005/add-and-remove-quantity', {
+      fetch('https://red-onion-backend-server.herokuapp.com/add-and-remove-quantity', {
          method:"put",
          headers:{
             'Content-type':'application/json',
@@ -54,7 +54,7 @@ const Products = () => {
 
    // deleteCartFoodHandler
    const deleteCartFoodHandler = (foodId) => {
-      fetch('http://localhost:3005/remove-cart-food', {
+      fetch('https://red-onion-backend-server.herokuapp.com/remove-cart-food', {
          method:"delete",
          headers:{
             'Content-type':'application/json',
@@ -69,7 +69,7 @@ const Products = () => {
          })
          auth.setCart(deletedFood)
          if (result) {
-            fetch('http://localhost:3005/get-user', {
+            fetch('https://red-onion-backend-server.herokuapp.com/get-user', {
                method:'GET',
                headers:{
                   'Content-Type':'application/json',

@@ -19,7 +19,7 @@ const FoodDetails = () => {
 
    const finalCartHandler = (singleFood) => {
       singleFood.quantity = quantity;
-      fetch('http://localhost:3005/addTo-cart', {
+      fetch('https://red-onion-backend-server.herokuapp.com/addTo-cart', {
          method:"POST",
          headers:{
             'Content-type':'application/json',
@@ -33,7 +33,7 @@ const FoodDetails = () => {
          setIsSuccess(true);
          auth.setCart([...auth.cart, result])
          if (result) {
-            fetch('http://localhost:3005/get-user', {
+            fetch('https://red-onion-backend-server.herokuapp.com/get-user', {
                method:'GET',
                headers:{
                   'Content-Type':'application/json',

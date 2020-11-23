@@ -14,9 +14,10 @@ const SignIn = () => {
    const user = auth.user
    const history = useHistory()
 
+   const [signInResult, setSignInResult] = useState()
    const { register, handleSubmit, errors } = useForm();   
    const onSubmit = data => { 
-      fetch('http://localhost:3005/user-signIn', {
+      fetch('https://red-onion-backend-server.herokuapp.com/user-signIn', {
          method:'POST',
          headers:{
             'Content-Type':'application/json'
@@ -25,23 +26,24 @@ const SignIn = () => {
       })
       .then(res => res.json())
       .then(result => {
+         console.log(result)
+         setSignInResult(result)
+         setIsSuccess(true)
          result.token && localStorage.setItem('auth-token', result.token)
          const decoded = result.token && JwtDecode(result.token)
          result.token && auth.setUser(decoded)
-         history.push('/')
+         result.success && history.push('/')
       })      
    }
-   // useEffect(() => {
-   //    if (signed) {
-   //       window.location.reload()
-   //    }
-   // }, [signed])
 
-   // Sing In with Google 
+   const [isSuccess, setIsSuccess] = useState(false)
+   if (isSuccess) {
+      setTimeout(()=> setIsSuccess(false), 4000)
+   }
    
    useEffect(() => {
       if (user) {
-         fetch('http://localhost:3005/signup-with-google', {
+         fetch('https://red-onion-backend-server.herokuapp.com/signup-with-google', {
             method:'POST',
             headers:{
                'Content-type':'application/json'
@@ -77,6 +79,10 @@ const SignIn = () => {
                   
                   <div className="form-group">
                      <button className="btn btn-danger btn-block" type="submit">Sign In</button>
+                     {isSuccess &&
+                        <p className="ml-3 success-mgs text-success"> {signInResult.error ? signInResult.error : signInResult.success && signInResult.success} </p>
+                        
+                     }
                   </div>
                   <div className="option text-center">
                      <Link to='/signup'><label>Create a new Account</label></Link>

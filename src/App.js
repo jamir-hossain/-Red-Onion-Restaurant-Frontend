@@ -20,6 +20,7 @@ import OrderComplete from './Component/OrderComplete/OrderComplete';
 
 
 function App() {
+  console.log(localStorage.getItem('auth-token'))
   return (
     <div>
         <AuthContextProvider>

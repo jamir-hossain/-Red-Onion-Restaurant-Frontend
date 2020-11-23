@@ -20,7 +20,6 @@ const SingleFeature = (props) => {
                <img className="card-img-top" src={image} alt=""/>
             <div className="card-body">
                <div>
-                  
                   <div className="d-flex">
                      <span></span>
                      <h5> {name} </h5>

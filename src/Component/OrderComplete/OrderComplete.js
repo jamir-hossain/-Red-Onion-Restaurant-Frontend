@@ -12,7 +12,7 @@ const OrderComplete = () => {
     const [orderDetails, setOrderDetails] = useState();
     useEffect(() => {
         if (auth.user) {
-            fetch('http://localhost:3005/get_order_details', {
+            fetch('https://red-onion-backend-server.herokuapp.com/get_order_details', {
                 method:'get',
                 headers:{
                     'Content-type':'application/json',

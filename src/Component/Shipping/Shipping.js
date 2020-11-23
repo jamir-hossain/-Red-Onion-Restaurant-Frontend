@@ -30,7 +30,7 @@ const Shipping = () => {
    const cost = {totalItem, itemPrice:total, total:total + tax, tax}
    const [success, setSuccess] = useState();
    const placeOrder = (foods) => {
-      fetch('http://localhost:3005/place-order', {
+      fetch('https://red-onion-backend-server.herokuapp.com/place-order', {
          method:'POST',
          headers:{
             'Content-Type':'application/json',
