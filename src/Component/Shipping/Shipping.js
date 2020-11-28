@@ -50,82 +50,77 @@ const Shipping = () => {
    return (
       <div className='container'>
          <div className='row'>
-            <div className="col-md-6">
-               <div className="shippingForm">
-                  <form onSubmit={handleSubmit(onSubmit)} className="py-5">
-                     <h4 className="heading">Delivery Details</h4>
-                     <input className="form-control" name="name" placeholder="Full Name" ref={register({ required: true })} />
-                     {errors.name && <span className="error">Name is required</span>}
+            <div className="col-md-6 py-5 px-3 px-md-5 px-lg-5">
+               <form onSubmit={handleSubmit(onSubmit)} className="px-3">
+                  <h4 className="heading">Delivery Details</h4>
+                  <input className="form-control" name="name" placeholder="Full Name" ref={register({ required: true })} />
+                  {errors.name && <span className="error">Name is required</span>}
 
-                     <input className="form-control" name="email" placeholder="Email" ref={register({ required: true })} />
-                     {errors.email && <span className="error">Email is required</span>}
+                  <input className="form-control" name="email" placeholder="Email" ref={register({ required: true })} />
+                  {errors.email && <span className="error">Email is required</span>}
 
-                     <input className="form-control" name="phone" placeholder="Contact Number" type="number" ref={register({ required: true })} />
-                     {errors.phone && <span className="error">Phone is required</span>}
+                  <input className="form-control" name="phone" placeholder="Contact Number" type="number" ref={register({ required: true })} />
+                  {errors.phone && <span className="error">Phone is required</span>}
 
-                     <input className="form-control" name="city" placeholder="City" ref={register({ required: true })} />
-                     {errors.city && <span className="error">City is required</span>}
+                  <input className="form-control" name="city" placeholder="City" ref={register({ required: true })} />
+                  {errors.city && <span className="error">City is required</span>}
 
-                     <input className="form-control" name="address" placeholder="Address" ref={register({ required: true })} />
-                     {errors.address && <span className="error">Address is required</span>}
+                  <input className="form-control" name="address" placeholder="Address" ref={register({ required: true })} />
+                  {errors.address && <span className="error">Address is required</span>}
 
-                     <input className="form-control" name="zipCode" placeholder="Zip Code" type="number" ref={register({ required: true })} />
-                     {errors.zipCode && <span className="error">Zip-Code is required</span>}
-                     {
-                        cartFood && cartFood.length ? <button className="form-control submitBtn" type="submit" >Submit & Continue</button> : <button className="order" disabled>Place Order</button>
-                     }
-                  </form>
-               </div>
-            </div>
-
-            <div className=" col-md-6">
-               <div className="shippingProduct">
+                  <input className="form-control" name="zipCode" placeholder="Zip Code" type="number" ref={register({ required: true })} />
+                  {errors.zipCode && <span className="error">Zip-Code is required</span>}
                   {
-                     cartFood && cartFood.length ? <Products></Products> : <div className="heading">
-                     <h4>You haven't added any food</h4>
-                     <Link to="/"><p>Please Continue Shopping</p></Link>
-                  </div>
+                     cartFood && cartFood.length ? <button className="form-control submitBtn" type="submit" >Submit & Continue</button> : <button className="order" disabled>Place Order</button>
                   }
-                  <div className="">
-                     <div className="d-flex row">
-                        <div className="col-md-6">
-                           <h5>Total Ordered Food</h5>
-                        </div>
-                        <div className="text-right col-md-6">
-                           <h5> {auth.user && auth.cart.length} Piece </h5>
-                        </div>
+               </form>
+            </div>
+            <div className=" col-md-6 py-5 px-3 px-md-5 px-lg-5">
+               {
+                  cartFood && cartFood.length ? <Products></Products> : <div className="heading">
+                  <h4>You haven't added any food</h4>
+                  <Link to="/"><p>Please Continue Shopping</p></Link>
+               </div>
+               }
+               <div className="">
+                  <div className="d-flex row">
+                     <div className="col-md-6">
+                        <h5>Total Ordered Food</h5>
                      </div>
-                     <div className="d-flex row">
-                        <div className="col-md-6">
-                           <h5>Total Food Price</h5>
-                        </div>
-                        <div className="text-right col-md-6">
-                           <h5>$ {total} </h5>
-                        </div>
+                     <div className="text-right col-md-6">
+                        <h5> {auth.user && auth.cart.length} Piece </h5>
                      </div>
-                     <div className="d-flex row">
-                        <div className="col-md-6">
-                           <h5>Tax & Vat</h5>
-                        </div>
-                        <div className="text-right col-md-6">
-                           <h5>$ {tax.toFixed(2)} </h5>
-                        </div>
-                     </div>
-                     <div className="d-flex row">
-                        <div className="col-md-6">
-                           <h5>Total Amount</h5>
-                        </div>
-                        <div className="text-right col-md-6">
-                           <h5>$ {(total + tax).toFixed(2)} </h5>
-                        </div>
-                     </div>
-                     {
-                        cartFood && cartFood.length && formData ? <button onClick={() => placeOrder(auth.cart)} className="order" style={{backgroundColor: "#ff2e5e"}}>Place Order</button> : <button className="order" disabled>Place Order</button>
-                     }
-                     {success &&
-                        <h3 className="ml-3 success-mgs text-success"> {success.error ? success.error : success.success && success.success} </h3>
-                     }
                   </div>
+                  <div className="d-flex row">
+                     <div className="col-md-6">
+                        <h5>Total Food Price</h5>
+                     </div>
+                     <div className="text-right col-md-6">
+                        <h5>$ {total} </h5>
+                     </div>
+                  </div>
+                  <div className="d-flex row">
+                     <div className="col-md-6">
+                        <h5>Tax & Vat</h5>
+                     </div>
+                     <div className="text-right col-md-6">
+                        <h5>$ {tax.toFixed(2)} </h5>
+                     </div>
+                  </div>
+                  <div className="d-flex row">
+                     <div className="col-md-6">
+                        <h5>Total Amount</h5>
+                     </div>
+                     <div className="text-right col-md-6">
+                        <h5>$ {(total + tax).toFixed(2)} </h5>
+                     </div>
+                  </div>
+                  {
+                     cartFood && cartFood.length && formData ? <button onClick={() => placeOrder(auth.cart)} className="order" style={{backgroundColor: "#ff2e5e"}}>Place Order</button> : <button className="order" disabled>Place Order</button>
+                  }
+                  {success &&
+                     <h3 className="ml-3 success-mgs text-success"> {success.error ? success.error : success.success && success.success} </h3>
+                  }
                </div>
             </div>
 

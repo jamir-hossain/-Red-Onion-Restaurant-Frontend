@@ -57,7 +57,7 @@ const OrderComplete = () => {
                 </div>
                 <div className="col-md-4 pl-md-5">
                     <div className="bg-light p-3 rounded">
-                        <img className="" src={Rider} alt=""/>
+                        <img className="img-fluid" src={Rider} alt=""/>
                         <div className="bg-white  rounded p-3 my-3">
                             <div>    
                                 <h4>Your Location</h4>

@@ -12,5 +12,11 @@ i.fas.fa-shopping-cart.cart-icon {
    font-size: 20px;
 }
 .header{
-   margin-bottom: 70px;
+   margin-bottom: 68px;
 }
+
+@media only screen and (max-width: 767px) {
+   .Custom{
+      padding: 7px 0px !important;
+   }
+ }

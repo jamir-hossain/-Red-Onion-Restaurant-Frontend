@@ -11,6 +11,16 @@
    border: none;
    background: white;
 }
+@media only screen and (max-width: 767px) {
+   .button {
+      font-size: 16px;
+      font-weight: 500;
+      padding: 5px;
+      margin: 0px 10px;
+      border: none;
+      background: white;
+   }
+ }
 .button:focus{
    outline: none;
 }

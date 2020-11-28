@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../../images/logo2.png'
+import Logo2 from '../../images/Background (2).png'
 import './Header.css'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../SignIn and SignUp/useAuth';
@@ -9,13 +10,13 @@ const Header = () => {
    const auth = useAuth()
    const cartFood = auth.userData && auth.userData.cartFood
 
-
    return (
       <div className="header">
-         <nav className="navbar navbar-expand navbar-light bg-white py-0 fixed-top">
+         <nav className="navbar navbar-expand navbar-light bg-white py-0 fixed-top Custom">
             <div className="container">
                <Link to="/" className="navbar-brand">
-                  <img src={logo} alt="Hot Onion Logo"/>
+                  <img className="d-none d-md-block d-lg-block" src={logo} alt="Hot Onion Logo"/>
+                  <img className="d-block d-md-none d-lg-none img-fluid" src={Logo2} alt="Hot Onion Logo"/>
                </Link>
                <ul className="navbar-nav align-items-center">
                   <li className="nav-item active cart">

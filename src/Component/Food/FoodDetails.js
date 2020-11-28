@@ -54,26 +54,30 @@ const FoodDetails = () => {
    }
 
    return (
-      <div className="container d-flex">
-         <div className="foodDetails">
-            <h1> {name} </h1>
-            <p> {details} </p>
-            <div className="d-flex  my-4">
-               <h2 className="price">${price.toFixed(2)}</h2>
-               <div className="cart-controller ml-3 btn">
-                     <button className="btn" onClick={() => setQuantity(quantity <= 1 ? 1 : quantity - 1)}>-</button> {quantity} <button className="btn" onClick={() => setQuantity(quantity + 1)}>+</button>
+      <div className="container">
+         <div className="row">
+            <div className="col-md-6 foodDetails ordered-2">
+               <div className="">
+                  <h1 className="fooTitle"> {name} </h1>
+                  <p className="text-justify"> {details} </p>
+                  <div className="d-flex  my-4">
+                     <h2 className="price">${price.toFixed(2)}</h2>
+                     <div className="cart-controller ml-3 btn">
+                           <button className="btn" onClick={() => setQuantity(quantity <= 1 ? 1 : quantity - 1)}>-</button> {quantity} <button className="btn" onClick={() => setQuantity(quantity + 1)}>+</button>
+                     </div>
+                  </div>
+               </div>
+               <div className="action d-flex align-items-center">
+                  <button className="btn btn-danger btn-rounded mb-2" onClick={()=>finalCartHandler(singleFood)}><i class="fas fa-shopping-cart"></i> Add</button>
+                  {isSuccess &&
+                     <p className="ml-3 success-mgs text-success"> {result.error ? result.error : result.success && result.success} </p>
+                     
+                  }
                </div>
             </div>
-            <div className="action d-flex align-items-center">
-               <button className="btn btn-danger btn-rounded mb-2" onClick={()=>finalCartHandler(singleFood)}><i class="fas fa-shopping-cart"></i> Add</button>
-               {isSuccess &&
-                  <p className="ml-3 success-mgs text-success"> {result.error ? result.error : result.success && result.success} </p>
-                  
-               }
+            <div className="col-md-6 pt-5 imgStyle">
+               <img className="img-fluid" src={image} alt=""/>
             </div>
-         </div>
-         <div className="img-fluid bigImg">
-            <img src={image} alt=""/>
          </div>
       </div>
    );
