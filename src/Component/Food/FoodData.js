@@ -3,11 +3,10 @@ import foodData from '../../foodData/foodData'
 import AllFood from './AllFood';
 import './FoodData.css'
 import { Link } from 'react-router-dom';
-import { useAuth } from '../SignIn and SignUp/useAuth';
+import { useContextData } from '../ContextProvider/ContextProvider';
 
 const FoodData = () => {
-   const auth = useAuth()
-   const cartFood = auth.userData && auth.userData.cartFood
+   const {cart} = useContextData()
 
    const [data, setData] = useState(foodData)
    const [category, setCategory] = useState("breakfast")
@@ -27,7 +26,7 @@ const FoodData = () => {
          </div>
          <div className="text-center">
             {
-               cartFood && cartFood.length ? <Link to="/shipping"><button className="checkoutBtn" style={{backgroundColor: "#dc3545", color:'white'}}>Checkout Your Food</button></Link>:
+               cart && cart.length ? <Link to="/shipping"><button className="checkoutBtn" style={{backgroundColor: "#dc3545", color:'white'}}>Checkout Your Food</button></Link>:
                <button className="checkoutBtn" disabled>Checkout Your Food</button>
             }
          </div>

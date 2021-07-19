@@ -2,22 +2,21 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './Shipping.css'
 import Products from './Products';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../SignIn and SignUp/useAuth';
+import { Link, useHistory } from 'react-router-dom';
+import { useContextData } from '../ContextProvider/ContextProvider';
 
 
 const Shipping = () => {
-   const auth = useAuth()
-   const cartFood = auth.userData && auth.userData.cartFood
-   
-   // To Get User Information From user form
+   const history = useHistory()
+   const {cart, placeOrder} = useContextData()
    const [formData, setFormData] = useState()
    const { register, handleSubmit, watch, errors } = useForm()
    const onSubmit = data => setFormData(data);
 
    // To Get All Food Price Calculation
-   const totalPd = auth.user && auth.cart.map( food => food.price * food.quantity)
-   const total = totalPd && totalPd.reduce( (defaultValue, price) => defaultValue+price, 0)
+   const totalPd = cart && cart.map(food => food.price * food.quantity)
+   const total = totalPd && 
+   totalPd.reduce((accumulator, currentValue) => accumulator+currentValue, 0)
    const tax = parseFloat((total * 5)/100)
 
    // Place Order
@@ -26,24 +25,11 @@ const Shipping = () => {
        setTimeout(() => setIsSuccess(false), 5000)
     }
 
-   const totalItem = auth.user && auth.cart.length
-   const cost = {totalItem, itemPrice:total, total:total + tax, tax}
-   const [success, setSuccess] = useState();
-   const placeOrder = (foods) => {
-      fetch('https://red-onion-backend-server.herokuapp.com/place-order', {
-         method:'POST',
-         headers:{
-            'Content-Type':'application/json',
-            'Authorization':localStorage.getItem('auth-token')
-         },
-         body:JSON.stringify({user:auth.user, shipping:formData, foods, cost})
-      })
-      .then(res => res.json())
-      .then(result => {
-         setSuccess(result)
-         setIsSuccess(true)
-         window.location.pathname = "/order-complete"
-      })
+   const cost = {itemPrice:total, total:total + tax, tax}
+   const submitOrder = (foods) => {
+      formData.totalItems = foods
+      formData.totalCost = cost
+      placeOrder(formData, history)
    }
 
 
@@ -70,17 +56,22 @@ const Shipping = () => {
 
                   <input className="form-control" name="zipCode" placeholder="Zip Code" type="number" ref={register({ required: true })} />
                   {errors.zipCode && <span className="error">Zip-Code is required</span>}
-                  {
-                     cartFood && cartFood.length ? <button className="form-control submitBtn" type="submit" >Submit & Continue</button> : <button className="order" disabled>Place Order</button>
-                  }
+                  <button 
+                     type="submit"
+                     className="form-control submitBtn" 
+                  >
+                     Submit & Continue
+                  </button>
                </form>
             </div>
             <div className=" col-md-6 py-5 px-3 px-md-5 px-lg-5">
                {
-                  cartFood && cartFood.length ? <Products></Products> : <div className="heading">
-                  <h4>You haven't added any food</h4>
-                  <Link to="/"><p>Please Continue Shopping</p></Link>
-               </div>
+                  cart && cart.length ? 
+                  <Products></Products> : 
+                  <div className="heading">
+                     <h4>You haven't added any food</h4>
+                     <Link to="/"><p>Please Continue Shopping</p></Link>
+                  </div>
                }
                <div className="">
                   <div className="d-flex row">
@@ -88,7 +79,7 @@ const Shipping = () => {
                         <h5>Total Ordered Food</h5>
                      </div>
                      <div className="text-right col-md-6">
-                        <h5> {auth.user && auth.cart.length} Piece </h5>
+                        <h5> {cart && cart.length} Piece </h5>
                      </div>
                   </div>
                   <div className="d-flex row">
@@ -116,14 +107,20 @@ const Shipping = () => {
                      </div>
                   </div>
                   {
-                     cartFood && cartFood.length && formData ? <button onClick={() => placeOrder(auth.cart)} className="order" style={{backgroundColor: "#ff2e5e"}}>Place Order</button> : <button className="order" disabled>Place Order</button>
-                  }
-                  {success &&
-                     <h3 className="ml-3 success-mgs text-success"> {success.error ? success.error : success.success && success.success} </h3>
+                     cart && cart.length && formData ? 
+                     <button 
+                        className="order" 
+                        onClick={() => submitOrder(cart)} 
+                        style={{backgroundColor: "#ff2e5e"}}
+                     >
+                        Place Order
+                     </button> : 
+                     <button className="order" disabled>
+                        Place Order
+                     </button>
                   }
                </div>
             </div>
-
          </div>
       </div>
    );

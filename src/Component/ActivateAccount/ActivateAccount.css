@@ -1,0 +1,32 @@
+.accountActivationPage{
+   min-height: 500px;
+   padding-top: 15px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.accountActiveDiv{
+   position: relative;
+   /* // .formLoader{
+   //    @include formLoaderStyle;
+   // } */
+}
+.accountActive{
+   max-width: 450px;
+   text-align: center;
+   padding: 30px;
+}
+.activeBtn{
+   background-color: #dd2900 !important;
+   font-weight: 600 !important;
+   color: white !important;
+   text-transform: capitalize;
+}
+.activeBtn a {
+   text-decoration: none;
+   color: white;
+}
+.activeBtn a:hover {
+   text-decoration: none;
+   color: white;
+}

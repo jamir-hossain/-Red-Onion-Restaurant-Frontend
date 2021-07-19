@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
-import { AuthContextProvider } from './Component/SignIn and SignUp/useAuth';
+import { AuthContextProvider } from './Component/ContextProvider/ContextProvider';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,41 +17,46 @@ import Footer from './Component/Footer/Footer';
 import SignIn from './Component/SignIn and SignUp/SignIn';
 import SignUp from './Component/SignIn and SignUp/SignUp';
 import OrderComplete from './Component/OrderComplete/OrderComplete';
+import ActivateAccount from './Component/ActivateAccount/ActivateAccount';
+import { useState } from 'react';
 
 
 function App() {
-  console.log(localStorage.getItem('auth-token'))
+  const [headerFooter, setHeaderFooter] = useState(true)
   return (
     <div>
         <AuthContextProvider>
         <Router>
-          <Header></Header>
+          {headerFooter && <Header />}
           <Switch>
             <Route exact path='/'>
-              <Banner></Banner>
-              <FoodData></FoodData>
-              <Feature></Feature>
-              <Footer></Footer>
+              <Banner />
+              <FoodData />
+              <Feature />
             </Route>
             <Route path='/food/:foodKey'>
-              <FoodDetails></FoodDetails>
+              <FoodDetails />
             </Route>
             <Route path='/shipping'>
-              <Shipping></Shipping>
+              <Shipping />
             </Route>
             <Route path="/login">
-              <SignIn></SignIn>
+              <SignIn setHeaderFooter={setHeaderFooter} />
             </Route>
             <Route path="/signup">
-              <SignUp></SignUp>
+              <SignUp />
             </Route>
             <Route path="/order-complete">
-              <OrderComplete></OrderComplete>
+              <OrderComplete />
+            </Route>
+            <Route path="/complete-registration/:dataToken">
+              <ActivateAccount setHeaderFooter={setHeaderFooter}/>
             </Route>
             <Route path="*">
-              <NotFound></NotFound>
+              <NotFound />
             </Route>
           </Switch>
+          {headerFooter && <Footer />}
         </Router>
         </AuthContextProvider>
     </div>

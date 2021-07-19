@@ -2,73 +2,93 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import Logo from '../../images/logo2.png';
+import FirebaseHandler from '../ContextProvider/ActionHandler/FirebaseHandler';
+import { useContextData } from '../ContextProvider/ContextProvider';
+import CommonForm from './CommonForm';
 
 const SignUp = () => {
-   const history = useHistory()
+   const {emailVerification} = FirebaseHandler()
+   const {toastMessage, formLoader} = useContextData()
 
-   const [signUpResult, setSignUpResult] = useState()
    const { register, handleSubmit, watch, errors } = useForm();   
    const onSubmit = data => { 
-      fetch('https://red-onion-backend-server.herokuapp.com/signup-user', {
-         method:'POST',
-         headers:{
-            'Content-Type':'application/json'
-         },
-         body:JSON.stringify({data})
-      })
-      .then(res => res.json())
-      .then(result => {
-         console.log(result)
-         setSignUpResult(result)
-         setIsSuccess(true)
-         result.success && history.push('/login')
-      })
-   }
-
-   const [isSuccess, setIsSuccess] = useState(false)
-   if (isSuccess) {
-      setTimeout(()=> setIsSuccess(false), 3000)
+      emailVerification(data)
    }
 
 
    return (
-      <div className="sign-up">
-         <div className="logo2 text-center">
-            <Link to="/">
-                  <img src={Logo} alt=""/>
-            </Link>
-         </div>
-         <div className="container">
-         <form onSubmit={handleSubmit(onSubmit)} className="py-5">
-            <div className="form-group">
-               <input name="name" className="form-control" ref={register({ required: true })} placeholder="Name" />
-               {errors.name && <span className="error">Name is required</span>}
+      <div className="container row mx-auto">
+         {toastMessage()}
+         <div className="signUpSignIn col-md-5 mx-auto">
+            <div className="logo2 text-center">
+               <img className="img-fluid" src={Logo} alt=""/>
             </div>
-            <div className="form-group">
-               <input name="email" className="form-control" ref={register({ required: true })} placeholder="Email"/>
-               {errors.email && <span className="error">Email is required</span>}
-            </div>
-            <div className="form-group">
-               <input type="password" name="password" className="form-control" ref={register({ required: true })} placeholder="Password" />
-               {errors.password && <span className="error">Password is required</span>}
-            </div>
-            <div className="form-group">
-               <input type="password" name="confirm_password" className="form-control" ref={register({
-               validate: (value) => value === watch('password')
-               })} placeholder="Confirm Password" />
-               {errors.confirm_password && <span className="error">Passwords don't match.</span>}
-            </div>
-            <div className="form-group">
-               <button className="btn btn-danger btn-block"  type="submit">Sign Up</button>
-               {isSuccess &&
-                  <p className="ml-3 success-mgs text-success"> {signUpResult.error ? signUpResult.error : signUpResult.success && signUpResult.success} </p>
-                  
-               }
-            </div>
-            <div className="option text-center">
-               <Link to='/login'><label>Already Have an Account</label></Link>
-            </div>
-         </form>
+            <form onSubmit={handleSubmit(onSubmit)} className="pt-3">
+               <div className="form-group">
+                  <input 
+                     name="username" 
+                     className="form-control" 
+                     ref={register({ required: true })} 
+                     placeholder="Name" 
+                  />
+                  {errors.name && <span className="error">
+                     Name is required
+                  </span>}
+               </div>
+               <div className="form-group">
+                  <input 
+                     name="email" 
+                     className="form-control" 
+                     ref={register({ required: true })} 
+                     placeholder="Email"
+                  />
+                  {errors.email && <span className="error">
+                     Email is required
+                  </span>}
+               </div>
+               <div className="form-group">
+                  <input 
+                     type="password" 
+                     name="password" 
+                     className="form-control" 
+                     ref={register({ required: true })} 
+                     placeholder="Password" 
+                  />
+                  {errors.password && <span className="error">
+                     Password is required
+                  </span>}
+               </div>
+               <div className="form-group">
+                  <input 
+                     type="password" 
+                     name="confirm_password" 
+                     className="form-control" 
+                     ref={register({
+                        validate: (value) => value === watch('password')
+                     })} 
+                     placeholder="Confirm Password" 
+                  />
+                  {errors.confirm_password && <span className="error">
+                     Passwords don't match.
+                  </span>}
+               </div>
+               <div className="form-group pt-3">
+                  <button 
+                     className="btn btn-danger btn-block" 
+                     type="submit"
+                  >
+                     Sign Up
+                  </button>
+               </div>
+               <div className="option text-center">
+                  <Link to='/login'>
+                     <label>
+                        Already Have an Account
+                     </label>
+                  </Link>
+               </div>
+            </form>
+            <CommonForm />
          </div>
       </div>
    );

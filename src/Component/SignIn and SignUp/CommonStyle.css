@@ -1,0 +1,36 @@
+.socialBox {
+   border: 1px solid gray;
+   padding: 3px 7px;
+   border-radius: 33px;
+   margin: 10px 0;
+   cursor: pointer;
+}
+.facebookLogin {
+   background-image: url(../../ICON/fb.png);
+   padding: 6px;
+   font-size: 16px;
+   font-weight: 500;
+   background-repeat: no-repeat;
+   background-position: left;
+   background-size: 30px;
+   text-align: center;
+}
+.googleLogin {
+   background-image: url(../../ICON/google.png);
+   padding: 6px;
+   font-size: 16px;
+   font-weight: 500;
+   background-repeat: no-repeat;
+   background-position: left;
+   background-size: 30px;
+   text-align: center;
+}
+.orOptionDiv {
+   margin-top: 20px;
+   margin-bottom: 25px;
+}
+.orOptionDiv .orOption {
+   height: 2px;
+   background: #8080809c;
+   margin-top: 14px;
+}
